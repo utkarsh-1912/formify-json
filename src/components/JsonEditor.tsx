@@ -44,9 +44,9 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ value, onChange, error }) => {
           className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
         >
           {darkMode ? (
-            <MoonIcon className="h-5 w-5 text-white" />
-          ) : (
             <SunIcon className="h-5 w-5 text-white" />
+          ) : (
+            <MoonIcon className="h-5 w-5 text-white" />
           )}
         </button>
       </div>
