@@ -1,5 +1,7 @@
 import React from "react";
 import FormFieldRenderer from "./FormFieldRenderer";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FormGeneratorProps {
   schema: any;
@@ -14,7 +16,7 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
       result[key] = value;
     });
     console.log("Form Submitted:", result);
-    alert("Form submitted successfully!");
+    toast.success("Form submitted successfully!");
   };
 
   // Handle empty or missing schema.fields
@@ -46,6 +48,8 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
         </div>
       </form>
     </div>
+    {/* Toast Container */}
+    <ToastContainer />
     </div>
   );
 };

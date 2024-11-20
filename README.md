@@ -16,8 +16,13 @@
 
 ### Prerequisites
 
-- Node.js (>= 16.x)
-- npm (>= 7.x)
+- Node.js (>= 18.x)
+- NPM (>= 7.x)
+- TypeScript
+- Tailwind CSS
+- Playwright for E2E testing
+- Jest for unit testing
+
 
 ### Installation
 
