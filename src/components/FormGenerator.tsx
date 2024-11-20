@@ -17,10 +17,20 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
     alert("Form submitted successfully!");
   };
 
+  // Handle empty or missing schema.fields
+  if (!schema || !schema.fields || schema.fields.length === 0) {
+    return (
+      <div className="w-full md:w-[48vw] m-2 md:h-[87vh] resize-none overflow-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Form Preview</h2>
+        <p className="text-gray-600 text-center">No fields are available to display in the form.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full md:w-[48vw] m-2 md:h-[87vh] resize-none overflow-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">{schema.formTitle}</h2>
-      <p className="text-sm text-gray-600 mb-6">{schema.formDescription}</p>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">{schema.formTitle || "Untitled Form"}</h2>
+      <p className="text-sm text-gray-600 mb-6">{schema.formDescription || "No description available."}</p>
       <form onSubmit={handleSubmit} className="space-y-6">
         {schema.fields.map((field: any) => (
           <FormFieldRenderer key={field.id} field={field} />

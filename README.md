@@ -1,46 +1,142 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Formify
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+**Formify** is a web-based tool for creating and managing dynamic forms based on JSON schemas. Users can define form structures in JSON format, edit them in real-time, and preview the forms. The application validates JSON schemas and provides a live preview of the form fields.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **JSON Schema Editor**: A rich, real-time editor to manage and modify form schemas.
+- **Form Preview**: Automatically generates a form based on the schema and displays it for user input.
+- **Error Handling**: Provides immediate feedback for invalid or incomplete schemas.
+- **Responsive UI**: Optimized for both desktop and mobile devices.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (>= 16.x)
+- npm (>= 7.x)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/yourusername/formify.git
+   cd formify
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install dependencies**:
 
-### `npm run eject`
+   Make sure you have `node` and `npm` installed. Run the following command to install the required dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   npm install
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Run the development server**:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   Once the dependencies are installed, you can start the development server using:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   ```bash
+   npm start
+   ```
 
-## Learn More
+   This will start the app on `http://localhost:3000/`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Run in Production
+
+To build the application for production and serve it:
+
+1. **Build the app**:
+
+   ```bash
+   npm run build
+   ```
+
+2. **Serve the app** (optional):
+
+   You can serve the production build locally using a static server like `serve`:
+
+   ```bash
+   npm install -g serve
+   serve -s build
+   ```
+
+   The app will be available at `http://localhost:5000/`.
+
+
+## Example JSON Schemas
+
+### Example 1: Basic Form Schema
+
+```json
+{
+  "formTitle": "Project Requirements Survey",
+  "formDescription": "Please fill out this survey about your project needs",
+  "fields": [
+    {
+      "id": "name",
+      "type": "text",
+      "label": "Full Name",
+      "required": true,
+      "placeholder": "Enter your full name"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "label": "Email Address",
+      "required": true,
+      "placeholder": "you@example.com",
+      "validation": {
+        "pattern": "^[^\s@]+@[^\s@]+\.[^\s@]+$",
+        "message": "Please enter a valid email address"
+      }
+    },
+    {
+      "id": "companySize",
+      "type": "select",
+      "label": "Company Size",
+      "required": true,
+      "options": [
+        { "value": "1-50", "label": "1-50 employees" },
+        { "value": "51-200", "label": "51-200 employees" },
+        { "value": "201-1000", "label": "201-1000 employees" },
+        { "value": "1000+", "label": "1000+ employees" }
+      ]
+    }
+  ]
+}
+```
+
+### Example 2: Form with Radio Buttons
+
+```json
+{
+  "formTitle": "Industry Survey",
+  "formDescription": "Please select your industry",
+  "fields": [
+    {
+      "id": "industry",
+      "type": "radio",
+      "label": "Industry",
+      "required": true,
+      "options": [
+        { "value": "tech", "label": "Technology" },
+        { "value": "healthcare", "label": "Healthcare" },
+        { "value": "finance", "label": "Finance" }
+      ]
+    }
+  ]
+}
+```
+
+## Local Development Guide
+
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Start the development server with `npm start`.
+4. Open your browser and visit `http://localhost:3000/`.
