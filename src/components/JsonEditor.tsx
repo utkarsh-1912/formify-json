@@ -28,7 +28,7 @@
 //   const handleJsonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 //     const newValue = e.target.value;
 //     setLocalValue(newValue);
-//     onChange(newValue);
+//     onChange(newValue); // No error handling for empty input
 //   };
 
 //   const handleToggleMode = () => {
@@ -52,11 +52,16 @@
 //       </div>
 
 //       <div className="relative">
-//       {error && <p className="text-red-700 mt-2 bg-red-300 rounded p-2 my-2">{error}</p>}
+//         {error && localValue.trim() !== "" && (
+//           <p className="text-red-700 mt-2 bg-red-300 rounded p-2 my-2">{error}</p>
+//         )}
+
 //         <textarea
 //           value={localValue}
 //           onChange={handleJsonChange}
-//           className={`w-full min-h-96 md:min-h-[75vh] h-full p-3 border rounded resize-none overflow-auto ${darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"} focus:outline-none`}
+//           className={`w-full min-h-96 md:min-h-[75vh] h-full p-3 border rounded resize-none overflow-auto ${
+//             darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"
+//           } focus:outline-none`}
 //           placeholder="Enter JSON here..."
 //         />
 //       </div>
@@ -88,6 +93,7 @@ interface JsonEditorProps {
 const JsonEditor: React.FC<JsonEditorProps> = ({ value, onChange, error }) => {
   const [localValue, setLocalValue] = useState(value);
   const [darkMode, setDarkMode] = useState(false);
+  const [viewMode, setViewMode] = useState<"editor" | "viewer">("editor"); // State for view mode
 
   useEffect(() => {
     setLocalValue(value); // Sync the initial value
@@ -103,10 +109,28 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ value, onChange, error }) => {
     setDarkMode(!darkMode);
   };
 
+  const handleViewModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setViewMode(e.target.value as "editor" | "viewer");
+  };
+
   return (
-    <div className={`p-6 shadow-lg ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}`}>
+    <div className={`p-6 shadow-lg h-full ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}`}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">JSON Editor</h2>
+        {/* Dropdown for switching between editor and viewer */}
+        <div>
+          <label htmlFor="viewMode" className="mr-2 font-semibold">Mode:</label>
+          <select
+            id="viewMode"
+            value={viewMode}
+            onChange={handleViewModeChange}
+            className={`p-1 border rounded ${
+              darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"
+            } focus:outline-none`}
+          >
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
+        </div>
         <button
           onClick={handleToggleMode}
           className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
@@ -124,14 +148,25 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ value, onChange, error }) => {
           <p className="text-red-700 mt-2 bg-red-300 rounded p-2 my-2">{error}</p>
         )}
 
-        <textarea
-          value={localValue}
-          onChange={handleJsonChange}
-          className={`w-full min-h-96 md:min-h-[75vh] h-full p-3 border rounded resize-none overflow-auto ${
-            darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"
-          } focus:outline-none`}
-          placeholder="Enter JSON here..."
-        />
+        {/* Render based on view mode */}
+        {viewMode === "editor" ? (
+          <textarea
+            value={localValue}
+            onChange={handleJsonChange}
+            className={`w-full min-h-96 md:min-h-[75vh] h-full p-3 border rounded resize-none overflow-auto ${
+              darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"
+            } focus:outline-none`}
+            placeholder="Enter JSON here..."
+          />
+        ) : (
+          <pre
+            className={`w-full min-h-48 h-full max-h-[75vh] p-3 border rounded resize-none overflow-y-auto ${
+              darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800"
+            } focus:outline-none`}
+          >
+            {formatJson(localValue)}
+          </pre>
+        )}
       </div>
     </div>
   );

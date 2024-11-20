@@ -28,9 +28,10 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
   }
 
   return (
-    <div className="w-full md:w-[48vw] m-2 md:h-[87vh] resize-none overflow-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <div className="p-2">
+    <div className="w-full md:h-[87vh] resize-none overflow-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">{schema.formTitle || "Untitled Form"}</h2>
-      <p className="text-sm text-gray-600 mb-6">{schema.formDescription || "No description available."}</p>
+      <p className="text-sm text-gray-600 mb-6">{schema.formDescription}</p>
       <form onSubmit={handleSubmit} className="space-y-6">
         {schema.fields.map((field: any) => (
           <FormFieldRenderer key={field.id} field={field} />
@@ -44,6 +45,7 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

@@ -96,12 +96,12 @@ const App = () => {
   return (
     <>
       <header className="p-2 shadow-lg bg-white flex items-center">
-      <img src="/logo-long.png" alt="Logo" className="h-12" />
+      <img src="/logo-long.png" alt="Logo" className="h-12 pl-2" />
         {/* <img src="/logo-long.png" alt="Logo" className="w-12 h-12 mr-2" /> */}
         {/* <h2 className="text-2xl font-bold">Formify</h2> */}
       </header>
       <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-full gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-2">
         <JsonEditor value={jsonSchema} onChange={handleSchemaChange} error={error} />
         <FormGenerator schema={schema} />
       </div>
