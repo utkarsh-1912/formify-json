@@ -30,7 +30,7 @@
 
    ```bash
    git clone https://github.com/utkarsh-1912/formify-json.git
-   cd formify
+   cd formify-json
    ```
 
 2. **Install dependencies**:
