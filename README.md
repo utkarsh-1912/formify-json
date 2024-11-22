@@ -29,7 +29,7 @@
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/formify.git
+   git clone https://github.com/utkarsh-1912/formify-json.git
    cd formify
    ```
 
@@ -145,3 +145,5 @@ To build the application for production and serve it:
 2. Run `npm install` to install dependencies.
 3. Start the development server with `npm start`.
 4. Open your browser and visit `http://localhost:3000/`.
+
+![image](https://github.com/user-attachments/assets/81d1e147-b1f3-4b98-9e0b-4abe9427a6f0)
